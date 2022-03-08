@@ -1,6 +1,6 @@
-import { Link, useLoaderData, json } from 'remix';
-import slugify from 'slugify';
-import NetlifyGraph from '../../netlify/functions/netlifyGraph';
+import { Link, useLoaderData, json } from "remix";
+import slugify from "slugify";
+import NetlifyGraph from "../../netlify/functions/netlifyGraph";
 
 type LoaderData = Awaited<ReturnType<typeof getLoaderData>>;
 type FetchIssuesResponse = Awaited<ReturnType<typeof NetlifyGraph.fetchIssues>>;
@@ -12,7 +12,7 @@ async function getLoaderData() {
   // Workaround: Fetch data using Netlify Functions which seems
   // to have Netlify Graph authentication working.
   const res = await fetch(
-    'https://netlify-graph-remix.netlify.app/.netlify/functions/github'
+    "https://ngraph-github.netlify.app/.netlify/functions/github"
   );
 
   const json: FetchIssuesResponse = await res.json();
@@ -27,7 +27,7 @@ async function getLoaderData() {
   return json.data.gitHub.repository.issues.edges.map(({ node }) => {
     return {
       ...node,
-      slug: slugify(node.title).toLowerCase()
+      slug: slugify(node.title).toLowerCase(),
     };
   });
 }
@@ -41,14 +41,14 @@ export default function Index() {
 
   return (
     <div className="container">
-      <h1>Netlify Graph + Remix</h1>
+      <h1>Netlify Graph + Remix Stoke</h1>
       <p>
         This application demonstrates Remix using Netlify Graph to fetch data
-        from GitHub. When a new issue is created in this{' '}
+        from GitHub. When a new issue is created in this{" "}
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://github.com/petermekhaeil/netlify-graph-remix"
+          href="https://github.com/Fran-A-Dev/netlifygraph-github"
         >
           repository
         </a>
@@ -64,7 +64,7 @@ export default function Index() {
       </ul>
       <p>
         <small>
-          Source code available on{' '}
+          Source code available on{" "}
           <a href="https://github.com/petermekhaeil/netlify-graph-remix">
             GitHub
           </a>
